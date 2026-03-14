@@ -9,22 +9,21 @@ This documentation tracks the iterative build and review process for a WordPress
 1. **Prompt Miles** — Give Miles a specific instruction (e.g. "add a contact page template" or "set up the color palette").
 2. **Export the theme** — Download the generated theme files.
 3. **Review with Claude** — Drop the exported files here and ask for a structured review.
-4. **Document findings** — A new folder is created under `/docs/prompt-XX/` with a markdown report covering what was generated, what's correct, what's missing, and what needs fixing.
+4. **Document findings** — A review file is created at `/docs/prompts/prompt-review-XX.md` covering what was generated, what's correct, what's missing, and what needs fixing.
 5. **Feed back to Miles** — Use the findings to refine future prompts or to improve the Miles agent itself.
 
 ### Folder structure
 
 ```
 docs/
-├── OVERVIEW.md              ← you are here
-├── prompt-01/
-│   └── review.md            ← review of prompt 1 export
-├── prompt-02/
-│   └── review.md
-└── ...
+├── OVERVIEW.md
+└── prompts/
+    ├── prompt-review-01.md
+    ├── prompt-review-02.md
+    └── ...
 ```
 
-Each `review.md` follows a consistent format (see Review Template below).
+Each review file follows a consistent format (see Review Template below).
 
 ---
 
@@ -75,7 +74,7 @@ Each `review.md` follows a consistent format (see Review Template below).
 
 ## Suggested Prompts for Future Reviews
 
-Use these prompts (or variations) with Miles to systematically build out the theme. Each prompt becomes a new `prompt-XX` folder.
+Use these prompts (or variations) with Miles to systematically build out the theme. Each prompt becomes a new `prompt-review-XX.md` file.
 
 ### Foundation prompts
 - "Set up the base color palette and typography scale"
@@ -107,7 +106,7 @@ Use these prompts (or variations) with Miles to systematically build out the the
 
 ## Review Template
 
-Each `prompt-XX/review.md` should follow this structure:
+Each `prompt-review-XX.md` should follow this structure:
 
 ```markdown
 # Prompt XX — [Short description]
