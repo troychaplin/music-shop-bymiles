@@ -72,35 +72,11 @@ Each review file follows a consistent format (see Review Template below).
 
 ---
 
-## Suggested Prompts for Future Reviews
+## Review Prompt
 
-Use these prompts (or variations) with Miles to systematically build out the theme. Each prompt becomes a new `prompt-review-XX.md` file.
+After each Miles export, copy the updated theme files into this project and give Claude the following prompt to generate the next `prompt-review-XX.md`:
 
-### Foundation prompts
-- "Set up the base color palette and typography scale"
-- "Create the header and footer template parts"
-- "Build the front page template"
-- "Build standard inner page templates (page, single, archive, search, 404)"
-
-### Content prompts
-- "Add a blog query loop with pagination"
-- "Create a contact page pattern"
-- "Add a services/features section pattern"
-- "Build a testimonials or reviews pattern"
-- "Create an image gallery or portfolio grid"
-
-### Refinement prompts
-- "Add a light color style variation"
-- "Ensure all font sizes use fluid clamp values"
-- "Rename gradient slugs to be descriptive"
-- "Add proper focus and hover states to all interactive elements"
-- "Audit the theme for WCAG AA color contrast"
-
-### Advanced prompts
-- "Add a custom block style for the quote block"
-- "Create a style variation with an alternate font pairing"
-- "Optimize the spacing scale to follow a consistent ratio"
-- "Replace scroll animation JS with the Interactivity API"
+> Review the current state of the theme against the previous prompt review (if one exists). Read `docs/OVERVIEW.md` for the review criteria and `docs/prompts/` for prior reviews. Audit every file that changed — theme.json, templates, patterns, parts, CSS, JS, and functions.php — using the "What We're Looking For" checklist. Write the results to `docs/prompts/prompt-review-XX.md` using the Review Template format. Include the exact prompt I gave Miles in the "Prompt Given" section.
 
 ---
 
