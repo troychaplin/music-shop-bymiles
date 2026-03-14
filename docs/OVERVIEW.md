@@ -42,15 +42,36 @@ Each review file follows a consistent format (see Review Template below).
 | **Custom properties** | Are line-height and font-weight tokens actually referenced? Could they be replaced by standard settings? | Custom tokens that duplicate built-in settings add complexity without benefit. |
 | **Block styles** | Are core block overrides intentional and complete? Do resets (padding: 0, margin: 0) break expected behavior? | Aggressive resets can cause layout issues when authors add standard blocks. |
 
-### Templates & Patterns
+### Templates & Template Parts
 
-| Area | What to check |
-|------|---------------|
-| **Coverage** | Are all standard templates present (front-page, page, single, archive, search, 404, index, home)? |
-| **Consistency** | Do all templates use the same header/footer parts? Is spacing consistent? |
-| **Hardcoded content** | Are there strings that should be dynamic (site title, tagline, copyright year)? |
-| **Accessibility** | Proper heading hierarchy? Skip links? Focus states? Color contrast? |
-| **Semantic HTML** | Correct use of `<main>`, `<article>`, `<nav>`, `<aside>`? |
+| Area | What to check | Why it matters |
+|------|---------------|----------------|
+| **Coverage** | Are all standard templates present (front-page, page, single, archive, search, 404, index, home)? | Missing templates fall back to index, which usually looks broken. |
+| **Nesting depth** | Are blocks nested more than 3–4 levels deep? Can wrapper groups be eliminated? | Deep nesting makes templates hard to edit in the Site Editor and fragile to maintain. Every unnecessary group is a place things can break. |
+| **Wrapper groups** | Are there groups that exist only to hold a single child? Do groups duplicate layout behavior their parent already provides? | Redundant wrappers add markup bloat and confuse authors trying to find the right block to edit. |
+| **Block attributes** | Are inline styles used where theme.json presets exist (e.g. `style.color.background` instead of `backgroundColor` preset slug)? Are there unused or contradictory attributes? | Inline styles bypass the design system and won't update if tokens change. |
+| **Consistency** | Do all templates use the same header/footer parts? Is spacing between sections consistent across templates? Do similar pages (archive vs. search) share the same structural approach? | Inconsistency creates a patchwork feel and makes global changes harder. |
+| **Hardcoded content** | Are there strings that should be dynamic (site title, tagline, copyright year)? Are placeholder texts left in from generation? | Hardcoded strings don't update and create maintenance burden. |
+| **Layout strategy** | Is the template using constrained layout vs. padding for content width? Are full-width sections handled with `alignfull` or with manual padding? | Mixing strategies causes alignment bugs and makes it harder to add new sections. |
+| **Spacing approach** | Is vertical rhythm handled via `blockGap` on parent containers or via individual margin/padding on each block? | Per-block spacing is tedious to maintain. `blockGap` on a parent is cleaner and easier to adjust globally. |
+
+### Patterns
+
+| Area | What to check | Why it matters |
+|------|---------------|----------------|
+| **Reusability** | Could repeated template markup be extracted into a shared pattern? Are patterns too template-specific to be useful elsewhere? | Patterns should reduce duplication. A pattern used by only one template may not need to be a pattern. |
+| **Nesting & complexity** | Same nesting concerns as templates — are patterns clean or deeply wrapped? | Patterns are inserted by authors. Complex patterns are intimidating and easy to accidentally break. |
+| **Inserter visibility** | Are patterns correctly hidden from the inserter when they're template-only? Are user-facing patterns properly categorized? | Template-only patterns showing in the inserter clutter the UI. User patterns hidden from it can't be found. |
+
+### Header & Footer (Template Parts)
+
+| Area | What to check | Why it matters |
+|------|---------------|----------------|
+| **Navigation block** | Is it using the Navigation block or hardcoded links? Does it handle empty/missing menus gracefully? | Hardcoded nav links can't be edited by site owners through the UI. |
+| **Responsive behavior** | Does the header collapse to a mobile menu? Is the breakpoint reasonable? Are touch targets large enough? | Headers that don't adapt are the most visible mobile issue. |
+| **Sticky/fixed behavior** | Is sticky handled via CSS class or block attribute? Does it account for admin bar offset when logged in? | A sticky header that overlaps the admin bar or content is a common Miles output issue to watch for. |
+| **Footer structure** | Is content editable through blocks or baked into HTML? Is the copyright year dynamic? | Footer content that can't be changed in the editor defeats the purpose of FSE. |
+| **Accessibility** | Proper heading hierarchy? Skip links? Focus states? Landmark roles (`<header>`, `<footer>`, `<nav>`)? Color contrast on all states? | These are the most visited parts of the site — accessibility failures here affect every page. |
 
 ### CSS & JavaScript
 
